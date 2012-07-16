@@ -1,0 +1,15 @@
+Added HuddleApi support
+
+There are problems with using Scribe for OAuth2, in particular the token
+request MUST be a POST, must include a grant_type, and must expect a json
+response.
+
+Client_Secret is an *optional* field, since it offers no security benefit
+for distributed clients.
+
+* OAuth20Service adds access token parameters into a POST body, not a URL
+** see http://tools.ietf.org/html/draft-ietf-oauth-v2-30#section-4.1.3
+* Added required "grant_type=authorization_code" to access token requests
+* Allowed whitespace in json reader
+* Added "Accept" header with value of "application/json" to token requests
+* Added HuddleApi class and example code
