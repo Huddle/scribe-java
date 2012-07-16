@@ -14,7 +14,7 @@ public class HuddleApi extends DefaultApi20
 	{
 	}
 	
-	private static final String AUTHORIZE_URL = "%sauthorize?client_id=%s&redirect_uri=%s";
+	private static final String AUTHORIZE_URL = "%srequest?response_type=code&client_id=%s&redirect_uri=%s";
 	//private static final String ACCESS_TOKEN  = "%sgrant_type=authorization_code&client_id=%s&redirect_uri=%s";
 	final String _HUDDLEAUTHSERVER = "http://login.huddle.dev/";
 

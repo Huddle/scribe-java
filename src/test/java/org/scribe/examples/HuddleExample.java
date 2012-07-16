@@ -11,6 +11,11 @@ public class HuddleExample
 {
   public static void main(String[] args)
   {
+      System.setProperty("http.proxyHost", "localhost"); 
+      System.setProperty("http.proxyPort", "8888"); 
+      System.setProperty("https.proxyHost", "localhost"); 
+      System.setProperty("https.proxyPort", "8888"); 
+      
     OAuthService service = new ServiceBuilder()
                                   .provider(HuddleApi.class)
                                   .callback("urn:ietf:wg:oauth:2.0:oob")
@@ -18,6 +23,7 @@ public class HuddleExample
                                   .apiSecret("")
                                   .build();
     Token EMPTY_TOKEN = null;
+    String PROTECTED_RESOURCE_URL = "http://api.huddle.dev/entry/";
     Scanner in = new Scanner(System.in);
 
 
@@ -42,11 +48,13 @@ public class HuddleExample
     System.out.println();
 
 
-    /*
     // Now let's go and ask for a protected resource!
     System.out.println("Now we're going to access a protected resource...");
-    OAuthRequest request = new OAuthRequest(Verb.POST, PROTECTED_RESOURCE_URL); //entry point
-    service.signRequest(accessToken, request);
+    OAuthRequest request = new OAuthRequest(Verb.GET, PROTECTED_RESOURCE_URL); //entry point
+    request.addHeader("Accept", "application/json");
+
+    request.addHeader("Authorization", "OAuth2 "+ accessToken.getToken());
+    System.out.println(accessToken.getToken());
     Response response = request.send();
     System.out.println("Got it! Lets see what we found...");
     System.out.println();
@@ -55,6 +63,6 @@ public class HuddleExample
 
     System.out.println();
     System.out.println("Thats it man! Go and build something awesome with Scribe! :)");
-    */
+
   }
 }
